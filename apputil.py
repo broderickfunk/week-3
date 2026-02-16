@@ -25,13 +25,13 @@ df_bellevue = pd.read_csv(url)
 df_bellevue["gender"] = df_bellevue["gender"].astype(str).str.strip().str.lower()
 df_bellevue.loc[~df_bellevue["gender"].isin(["m","w"]), "gender"] = pd.NA
 
-def task_i():
+def task_1():
     print("The gender column returned multiple values that I did not expect. " \
     "I changed the letters not representing man or woman to missing because we cannot know what those values mean.")
     return df_bellevue.isna().sum().sort_values().index.tolist()
 
 
-def task_ii():
+def task_2():
     print("For ease changing the data column to datetime format first was essential.")
     return (
         df_bellevue.assign(year=pd.to_datetime(df_bellevue["date_in"], errors="coerce").dt.year)
@@ -41,9 +41,9 @@ def task_ii():
     )
 
 
-def task_iii():
+def task_3():
     return df_bellevue.groupby("gender")["age"].mean()
 
 
-def task_iv():
+def task_4():
     return df_bellevue["profession"].value_counts().head(5).index.tolist()
